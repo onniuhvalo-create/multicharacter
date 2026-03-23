@@ -1,0 +1,27 @@
+if GetResourceState('ox_inventory') ~= 'started' then return end
+if GetResourceState('qs-inventory') == 'started' then return end
+if GetResourceState('origen_inventory') == 'started' then return end
+
+local OX = exports['ox_inventory']
+
+Inventory = Inventory or {}
+
+--- AddItem(source, item, count, slot, metadata)
+--- @param source number
+--- @param item string
+--- @param count? number|nil
+--- @param slot? number|nil
+--- @param metadata? any|nil
+--- @return boolean
+function Inventory.AddItem(source, item, count, slot, metadata)
+    if not source or not item then
+        return false
+    end
+
+    return OX:AddItem(
+        source,
+        item,
+        count or 1,
+        metadata or {}
+    )
+end
